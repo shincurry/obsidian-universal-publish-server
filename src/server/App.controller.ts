@@ -49,7 +49,7 @@ export class AppController {
           new FileTypeValidator({ fileType: 'application/zip' }),
         ],
         errorHttpStatusCode: HttpStatus.BAD_REQUEST,
-        fileIsRequired: false,
+        fileIsRequired: true,
       })
     ) zippack: Express.Multer.File,
     @YupValidatedParam("publishId", PublishIdParamValidationSchema) publishId: string,
