@@ -40,7 +40,7 @@ export class AppService {
     }
   }
 
-  async publish(zippack: Buffer, diff?: VaultFileDiff) {
+  async publish(publishId: string, zippack: Buffer, diff?: VaultFileDiff) {
     const sourceZip = await JSZip.loadAsync(zippack);
 
     if (diff) {
@@ -74,7 +74,8 @@ export class AppService {
       responseType: 'arraybuffer',
     })
 
-    const webOutputPath = this.configService.get<string>("WEB_OUTPUT_PATH")!
+    const webOutputRootPath = this.configService.get<string>("WEB_OUTPUT_PATH")!
+    const webOutputPath = path.join(webOutputRootPath, publishId);
     const websiteZip = await JSZip.loadAsync(Buffer.from(response.data));
 
     await fs.emptyDir(webOutputPath)

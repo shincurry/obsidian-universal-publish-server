@@ -3,6 +3,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import {YupValidatedBody as YupValidatedBody } from '../base/decorators/YupValidatedBody';
 import { AppService } from './App.service';
 import * as Yup from 'yup';
+import { YupValidatedParam } from '../base/decorators/YupValidatedParam';
 
 const VaultFileValidationSchema = Yup.object({
   sha1: Yup.string().required()
@@ -23,18 +24,23 @@ const PublishBodyValidationSchema = Yup.object({
   }).optional().json(),
 })
 
+const PublishIdParamValidationSchema = Yup
+  .string().min(1).max(20)
+  .matches(/[a-zA-Z0-9-]+/);
+
 @Controller('/publish')
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Post('/prepare')
+  @Post('/:publishId/prepare')
   async preparePublish(
+    @YupValidatedParam("publishId", PublishIdParamValidationSchema) _publishId: string,
     @YupValidatedBody(PublishPrepareBodyValidationSchema) body: Yup.InferType<typeof PublishPrepareBodyValidationSchema>,
   ) {
     return await this.appService.prepare(body.filelist)
   }
 
-  @Post('/')
+  @Post('/:publishId')
   @UseInterceptors(FileInterceptor('zippack'))
   async publish(
     @UploadedFile(
@@ -46,9 +52,10 @@ export class AppController {
         fileIsRequired: false,
       })
     ) zippack: Express.Multer.File,
+    @YupValidatedParam("publishId", PublishIdParamValidationSchema) publishId: string,
     @YupValidatedBody(PublishBodyValidationSchema) body: Yup.InferType<typeof PublishBodyValidationSchema>,
   ) {
-    await this.appService.publish(zippack.buffer, body.diff);
+    await this.appService.publish(publishId, zippack.buffer, body.diff);
   }
 
 }
