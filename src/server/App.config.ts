@@ -7,6 +7,7 @@ import * as Yup from 'yup';
 export const ConfigValidationSchema= Yup.object({
   HOST: Yup.string().default('127.0.0.1'),
   PORT: Yup.number().default(9000),
+  PASSWORD: Yup.string(),
   FILE_CACHE_DB: Yup.string()
     .default(path.join(process.cwd(), 'data', 'cache.db')),
   WEB_GENERATOR_API_URL: Yup.string()

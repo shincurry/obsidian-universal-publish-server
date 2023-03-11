@@ -5,6 +5,7 @@ import { AppService } from './App.service';
 import { ConfigService } from '@nestjs/config';
 import sqliteStore from 'cache-manager-sqlite';
 import { HttpModule } from '@nestjs/axios';
+import { AuthGuard } from './Auth.guard';
 
 @Module({
   imports: [
@@ -25,6 +26,6 @@ import { HttpModule } from '@nestjs/axios';
     HttpModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, AuthGuard],
 })
 export class AppModule {}
