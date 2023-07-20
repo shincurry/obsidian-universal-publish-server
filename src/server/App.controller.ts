@@ -2,8 +2,7 @@ import { Controller, FileTypeValidator, HttpStatus, ParseFilePipe, Post, Uploade
 import { FileInterceptor } from '@nestjs/platform-express';
 import { AppService } from './App.service';
 import * as Yup from 'yup';
-import { YupValidatedBody } from '../base/decorators/YupValidatedBody.decorator';
-import { YupValidatedParam } from '../base/decorators/YupValidatedParam.decorator';
+import { YupValidatedBody, YupValidatedParam } from 'nestjs-extends';
 
 const VaultFileValidationSchema = Yup.object({
   sha1: Yup.string().required()
