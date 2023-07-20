@@ -3,7 +3,7 @@ import Bluebird from 'bluebird';
 import JSZip from 'jszip';
 import { Cache } from 'cache-manager';
 import { ConfigService } from '@nestjs/config';
-import { Config } from './App.config';
+import { Config } from './config.module';
 import FormData from 'form-data';
 import axios from 'axios';
 import fs from 'fs-extra';

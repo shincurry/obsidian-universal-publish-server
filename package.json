@@ -6,17 +6,12 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "dev:server": "nest start --watch --config nest-cli.server.json",
-    "debug:server": "nest start --watch --debug --config nest-cli.server.json",
-    "build:server": "nest build --config nest-cli.server.json",
-    "start:server": "nest start --config nest-cli.server.json",
-    "run:server": "node dist/server/main",
-    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "dev": "nest start --watch --config nest-cli.json",
+    "debug": "nest start --watch --debug --config nest-cli.json",
+    "build": "nest build --config nest-cli.json",
+    "start": "nest start --config nest-cli.json",
     "test": "jest",
-    "test:watch": "jest --watch",
-    "test:cov": "jest --coverage",
-    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix"
   },
   "dependencies": {
     "@nestjs/axios": "^2.0.0",

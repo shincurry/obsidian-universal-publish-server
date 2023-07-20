@@ -24,12 +24,12 @@ export const ConfigValidationSchema= Yup.object({
 })
 export type Config = Yup.InferType<typeof ConfigValidationSchema>;
 
-
 @Global()
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
+      envFilePath: ['.env.example', '.env.local', '.env'],
       validate: (config) => {
         try {
           return ConfigValidationSchema.validateSync(config)

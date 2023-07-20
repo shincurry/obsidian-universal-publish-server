@@ -1,6 +1,6 @@
 import { Controller, FileTypeValidator, HttpStatus, ParseFilePipe, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { AppService } from './App.service';
+import { AppService } from './app.service';
 import * as Yup from 'yup';
 import { YupValidatedBody, YupValidatedParam } from 'nestjs-extends';
 

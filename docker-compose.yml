@@ -9,11 +9,10 @@ services:
     volumes:
       - ./data:/app/data
     environment:
-      - NODE_ENV=production
-      - HOST=0.0.0.0
+      - NODE_ENV=development
       - HOST=127.0.0.1
       - PORT=9000
       - FILE_CACHE_DB=./data/cache.db
       - WEB_GENERATOR_API_URL=http://127.0.0.1:9001
       - WEB_OUTPUT_PATH=./data/website
-    command: yarn run:server
+    command: yarn start server
